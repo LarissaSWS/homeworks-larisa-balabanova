@@ -1,39 +1,71 @@
-let string = 'some test string';
+// Объекты
 
-alert(string[0]); //получаем первую букву
-alert(string.length); //определяем длину
-alert(string.length-1); //последний символ строки
-alert(string[15]); //получаем последнюю буквы
-alert(string[0].toUpperCase()); //делаем первую букву большой
-alert(string[15].toUpperCase()); //делаем последнюю букву большой
-alert(string.indexOf("string")); //находим положение слова в строке
-alert(string.indexOf("string")-1); //положение второго пробела
-alert(string.substr(5,4));// получаем строку с 5 символа 4 буквы
-alert(string.slice(5,9));// получаем строку с 5 по 9 символы
-alert(string.slice(0, -6) );// новая строка с удалением 6 символов из предыдущей строки
-var a = '20';
-	b = '16';
-	string = a + b; 
-	alert(string); // получение из двух переменных одной с значением "2016"
+var myShop = new Object();					// задания по созданию обьектов
+myShop.product = "iphone";
+console.log(myShop.product);
+console.log(myShop.price = 100,
+			myShop.currency = 'dollar');
+myShop.details = new Object();				// создание обьектов в обьекте
+myShop.details.model = 'model';
+myShop.details.color = 'color';
+console.log(myShop.details.model);
+console.log(myShop.details.color);
 
 
+// If...else
 
-var PI = 3.14159265359;
-	alert(Math.round(PI * 100) / 100); //округление до 2 знаков после запятой
 
-alert(Math.max(15, 11, 16, 12, 51, 12, 13, 51)); // получение наибольшего числа
+let theWord = ""; // Задание 2 (присвоить значение hidden)
 
-alert(Math.min(15, 11, 16, 12, 51, 12, 13, 51)); // получение наименьшего числа
+if (theWord === "hidden") {
+	console.log(theWord = "visible");
+} else {
+	console.log(theWord = "hidden");
+}
 
-var numberRandom = Math.random();
-alert(numberRandom);				// Получаем случайное число
-alert(Math.round(numberRandom * 100) / 100); // округление до 2 знаков после запятой
 
-var numberRandomToTen = Math.floor(Math.random() * 11); 
-alert(numberRandomToTen); // случайное целое число от 0 до 10
+let a = 3; // Задание 2 (использовать  if)
 
-var numbersPlus = 0.6 + 0.7;
-alert(Math.round(numbersPlus * 10) / 10); // приведение результата к 1.3
+if (a === 0) {
+	console.log(a = 1);
+} else if (a < 0) {
+	console.log(a = 'less then zero');
+} else {
+	console.log(a *= 10);
+};
 
-var numberString = '100$';
-alert(parseInt(numberString)); //получение число из строки "100$"
+let car = { name: 'Lexus', 
+			age: 10, 
+			create: 2008, 
+			needRepair: false }; // Задание 3 (использовать  if)
+
+if (car.age > 5) {
+	console.log('Need Repair');
+	console.log(car.needRepair = true);
+} else {
+	console.log(car.needRepair = false);
+};
+
+
+let item = { name: 'Intel core i7',
+			 price: '100$', 
+			 discount: '15%' }; // Задание 4 
+
+if (item.discount != undefined && item.discount != '') {
+	console.log(item.priceWithDiscount = parseInt(item.price) - (parseInt(item.price) * (parseInt(item.discount) / 100)) + '$');
+} else {
+	console.log(item.price);
+}
+
+let product = { name: 'Яблоко',			// Задание 5
+				price: '10$'};
+let min = 10; // минимальная цена
+let max = 20; // максимальная цена
+
+if ( parseInt(product.price) >= min && parseInt(product.price) <= max ) {
+	console.log('название этого товара');
+} else {
+	console.log('товаров не найдено');
+}
+
+
