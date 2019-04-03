@@ -133,25 +133,7 @@ function changeCollection() {
 console.log(changeCollection([1,2,3], ['a', 'b', 'c']));
 
 
-//8. Создать функцию которая принимает массив пользователей, поле на которое хочу проверить и значение на которое хочу проверять. 
-// Проверять что все аргументы переданы. Возвращать новый массив с пользователями соответсвующие указанным параметрам. 
-// funcGetUsers(users, “gender”, “male”);[ {name: “Denis”, age: “29”, gender: “male”} , {name: “Ivan”, age: “20”, gender: “male”} ]
 
-let ourUsers = [ {name: 'Denis', age: '29', gender: 'male'} , 
-				 {name: 'Ivan', age: '20', gender: 'male'},
-				 {name: 'Nastya', age: '16', gender: 'female'} ];
-
-function funcGetUsers(ourUsers){
-	let newOurUsers = [];
-	for (i=0; i < ourUsers.length; i++){
-		if (ourUsers[i].age == 20) {
-			newOurUsers.push(ourUsers[i]);
-		};
-	};
-	return newOurUsers;
-};
-
-console.log(funcGetUsers(ourUsers));
 
 
 
