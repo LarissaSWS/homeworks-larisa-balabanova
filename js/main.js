@@ -1,140 +1,140 @@
-// Тернарный оператор. Switch case
+//  1. Создать функцию multiply, которая будет принимать любое количество чисел и возвращать их произведение: 
+// multiply(1,2,3) = 6 (1*2*3)
+// Если нет ни одного аргумента, вернуть ноль: multiply() // 0
 
-//  1. Записать в виде switch case следующее условие:
-// if (a === ‘block’) { console.log(‘block’)
-// } else if (a === ‘none’) { console.log(‘none’)
-// } else if (a === ‘inline’) { console.log(‘inline’)
-// } else { console.log(‘other’)
-// }
-// Записать условие, используя конструктор switch. В консоли должно отразиться только одно
-// значение.
+let n = prompt("Type the number");
 
-let display = 'none'; 
-switch (display) {
-	case 'block': 
-		console.log('block'); 
-		break; 
-	case 'none': 
-		console.log('none'); 
-		break; 
-	case 'inline': 
-		console.log('inline'); 
-		break; 
-	default: console.log('other'); 
+function multiply(n) {
+	let startNumber = 1;
+
+	for ( i = 1; i <= n; i++) {			
+	startNumber *= i;
+	};
+
+	return startNumber;
+};
+
+if (n > 1) {
+  console.log('Ваше число ' + multiply(n));
+} else {
+  console.log(multiply());;
+};
+
+// 2. Создать функцию, которая принимает строку и возвращает строку-перевертыш:
+// reverseString(‘test’) // “tset”.
+
+	let stringReverse = 'test';
+	let newStringReverse ='';
+
+function reverseString(stringReverse){
+
+	for (i = stringReverse.length-1; i >= 0; i--) {
+	newStringReverse += stringReverse[i];
+	};
+	return newStringReverse;
+}; 
+
+console.log(reverseString(stringReverse));
+
+// 3. Создать функцию, которая в качестве аргумента принимает строку из букв и возвращает строку, 
+// где каждый символ разделен пробелом и заменен на юникод-значение символа:
+// getCodeStringFromText(‘hello’) // “104 101 108 108 111”
+
+
+let newRowString = "hello";
+
+let myRowStringSplit = newRowString.split('');
+
+function sayHello(myRowStringSplit){
+	for ( i = 0; i < myRowStringSplit.length; i++){
+	var unicodeString = myRowStringSplit[i].charCodeAt(0);
+	myRowStringSplit[i] = unicodeString;
 }
 
+return myRowStringSplit;
+let finish = myRowStringSplit.join(' ');
 
-// 2. Из задач по условному оператору if else выполнить задачи 1, 2 и 3 в виде тернарного
-// оператора.
+};
 
-let theWord = ""; // Задание 1 (присвоить значение hidden)
-
-theWord === "hidden" ? console.log(theWord = "visible") : console.log(theWord = "hidden")
+console.log(sayHello(myRowStringSplit));
 
 
-let a = 3; // Задание 2 (использовать  if)
 
-a === 0 
-	? console.log(a = 1) 
-	: a < 0 
-		? console.log(a = 'less then zero')
-		: console.log(a *= 10);
+// 4. Создать функцию угадай число. Она принимает число от 1-10 
+//(обязательно проверить что число не больше 10 и не меньше 0). 
+//Генерирует рандомное число от 1-10 и сравнивает с переданным числом если они совпали то возвращает 
+//“Вы выиграли” если нет то “Вы не угадали ваше число 8 а выпало число 5”. 
+//Числа в строке указаны как пример вы подставляете реальные числа.
 
-let car = { name: 'Lexus', 			// Задание 3 (использовать  if)
-			age: 10, 
-			create: 2008, 
-			needRepair: false }; 
+let userNumber = prompt('Your number -');
+let compNumber = '';
 
-car.age > 5
-	? console.log('Need Repair', car.needRepair = true)
-	: console.log(car.needRepair = false);
 
-// 2. Циклы
+function getRandomNumber(max, min) {
+	compNumber = Math.floor(Math.random() * (max - min) + min);
 
-//  1. На основе строки “i am in the easycode” сделать новую строку 
-//  где первые буквы каждого слова будут в верхнем регистре. Использовать for или while.
+	if ( userNumber > 10 || 0 > userNumber || userNumber === ""){
+		console.log("Type another number from 0 to 10");
+	} else {
+		if (userNumber == compNumber) {
+			console.log("Вы выиграли");
+		} else {
+			console.log("Вы не угадали, ваше число " + userNumber + ", а выпало число " + compNumber);
+		}
+	};
+};
 
-let exempleString = 'i am in the easycode';
-let stringList = exempleString.split(' ');
-let strLength = stringList.length;
+getRandomNumber(1,11);
 
-for (i = 0; i < strLength; i++) {
-	var upStr = stringList[i].charAt(0).toUpperCase() + stringList[i].slice(1);
-	stringList[i] = upStr;
+// 5. Создать функцию, которая принимает число n и возвращает массив, 
+// заполненный числами от 1 до n: getArray(10); // [1,2,3,4,5,6,7,8,9,10]
+
+let userNumberArr = prompt("You number of Array is ");
+
+function getArray(userNumberArr){
+		let myFirstArray = [];
+		for ( var i = 1; i <= userNumberArr; i++ ){
+			let l = myFirstArray.push(i);
+		};
+		return myFirstArray;
+};
+		
+console.log(getArray(userNumberArr));
+
+// 6. Создать функцию, которая принимает массив, 
+//а возвращает новый массив с дублированными элементами входного массива:
+//doubleArray([1,2,3]) // [1,2,3,1,2,3]
+
+
+let mySecondArr = [ 1 , 2 , 3 ];
+
+function doubleArray(mySecondArr){
+	let newMySecondArr = mySecondArr.concat(mySecondArr);
+	return newMySecondArr;
+};
+
+console.log(doubleArray(mySecondArr));
+
+
+// 7. Создать функцию, которая принимает произвольное (любое) число массивов 
+// и удаляет из каждого массива первый элемент, а возвращает массив из оставшихся значений:
+// changeCollection([1,2,3], [‘a’, ’b’, ‘c’]) → [ [2,3], [‘b’, ‘c’] ], changeCollection([1,2,3]) → [ [2,3] ] и т.д.
+
+
+function changeCollection() {
+	let mass = [];
+    for (let i = 0; i < arguments.length; i++){
+    	arguments[i].shift();
+        mass.push(arguments[i]);
+    };
+    return mass;
 }
 
-var newString = stringList.join(' ');
-console.log(newString);
+console.log(changeCollection([1,2,3], ['a', 'b', 'c']));
 
 
-// 2. Дана строка “tseb eht ma i”. 
-// Используя циклы, сделать строку-перевертыш (то есть последняя буква становится первой, предпоследняя - второй итд).
-
-let strReverse = 'tseb eht ma i';
-let newReverseString ='';
-for (i = strReverse.length-1; i >= 0; i--) {
-	newReverseString += strReverse[i];
-}
-console.log(newReverseString); 
 
 
-// 3. Факториал числа - произведение всех натуральных чисел от 1 до n
-// включительно: 3! = 3*2*1, 5! = 5*4*3*2*1. С помощью циклов вычислить факториал числа 10. Использовать for.
-
-let factorial = 1;
-let n = 10;
-
-for ( i = 1; i <= n; i++) {
-	factorial *= i;
-}
-
-console.log(factorial);
 
 
-// 4. На основе строки “JavaScript is a pretty good language” сделать новую строку,
-// где каждое слово начинается с большой буквы, а пробелы удалены. Использовать for.
-
-let newStringJs = 'JavaScript is a pretty good language';
-let newStringJsSplit = newStringJs.split(' ');
-let strLengthNewStringJs = newStringJsSplit.length;
-
-for (i = 0; i < strLengthNewStringJs; i++) {
-	var upStrJs = newStringJsSplit[i].charAt(0).toUpperCase() + newStringJsSplit[i].slice(1);
-	newStringJsSplit[i] = upStrJs;
-
-}
-let joinString = newStringJsSplit.join('');
-console.log(joinString);
-
-
-// 5. Найти все нечетные числа в массиве от 1 до 15 включительно и вывести их в консоль. 
-// Массив [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] Использовать for of.
-
-let massiveRow = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-
-for (let value of massiveRow) { 
-	if (value % 2 !== 0) {
-    console.log( value );
-  }
-}
-
-// 6. Дан объект:
-// let list = {
-// name: ‘denis’, work: ‘easycode’, age: 29
-// }
-// Перебрать объект и если значение в свойстве это строка то переписать ее всю в верхнем регистре. Использовать for in.
-
-
-let list = {
-	name: 'denis', 
-	work: 'easycode', 
-	age: 29
-}
-
-for (let item in list) {
-	if (typeof list[item] === 'string')  {
-		console.log(list[item].toUpperCase());
-		list[item] = list[item].toUpperCase()
-	}
-}
 
