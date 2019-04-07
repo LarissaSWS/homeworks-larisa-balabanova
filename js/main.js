@@ -243,7 +243,6 @@ function filterCollection( products, priceLow, priceHigh ){
   	}
   	return 0;
 	});
-	console.log(sortOfProducts);
 
 };
 
