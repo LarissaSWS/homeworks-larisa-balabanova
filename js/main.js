@@ -1,151 +1,188 @@
-// DOM. Задачи.
-
-// Зная структуру html, с помощью изученных методов получить (в консоль):
-// 1. head
-
-console.log(document.head);
-
-// 2. body
-
-console.log(document.body);
-
-// 3. все дочерние элементы body и вывести их в консоль.
-
-console.log(document.body.children);
-
-// 4. первый div и все его дочерние узлы
-
-// а) вывести все дочерние узлы в консоль
-
-console.log(document.body.firstElementChild.children);
-
-// б) вывести в консоль все дочерние узлы, кроме первого и последнего
-
-let childrenArray = document.body.firstElementChild.children;
-
-for (var i = 1; i < childrenArray.length - 1; ++i) {
-    console.log(childrenArray[i])
-}
-
-console.log(childrenArray.slice(1, childrenArray.length - 1));
-
-// Для навигации по DOM использовать методы, которые возвращают только элементы
+//  Свойства. Код Задачи.
 
 
+// 1. Найти параграф и получить его текстовое содержимое (только текст!)
 
-// DOM.
+console.log(document.querySelector('p').textContent);
 
-// 1. Создать функцию, которая принимает два элемента.
+// 2. Создать функцию, которая принимает в качестве аргумента узел DOM и возвращает информацию
+// (в виде объекта) о типе узла, об имени узла и о количестве дочерних узлов (если детей нет - 0).
 
-// Функция проверяет, является ли первый элемент родителем для второго:
-// isParent(parent, child);
-// isParent(document.body.children[0], document.querySelector('mark'));
-// // true так как первый див является родительским элементом для mark
-// isParent(document.querySelector('ul'), document.querySelector('mark'));
-// // false так ul НЕ является родительским элементом для mark
+function getInfoNode(node){
 
-function isParent(parent, child){
-             console.log(parent.contains(child));
-        };
+    let typeOfNode = node.nodeType;
+    let nameOfNode = node.nodeName;
+    let numberOfChildren = node.children;
 
-isParent(document.body.children[0], document.querySelector('mark'));
-isParent(document.querySelector('ul'), document.querySelector('mark'));
+    if (!numberOfChildren) return numberOfChildren = 0;
 
+    const infoNode = {
+        typeOfNode,
+        nameOfNode,
+        numberOfChildren
+    };
 
-
-// 2. Получить список всех ссылок, которые не находятся внутри списка ul
-
-function getArrayWithoutUl (link) {
-    return !link.closest('ul')
+    return infoNode;
 };
 
-let newArrayFromBodyA = Array.from(document.links).filter(getArrayWithoutUl);
-console.log(newArrayFromBodyA);
+console.log(getInfoNode(document.querySelector('span')));
 
 
-// 3. Найти элемент, который находится перед и после списка ul
+// 3. Получить массив, который состоит из текстового содержимого ссылок внутри списка:
+//     getTextFromUl(ul) ---> ["Link1", "Link2", "Link3"]
 
-let getSelectorUl = document.querySelector('ul');
+let querySelectorUl = document.querySelector('ul').children;
 
-console.log(getSelectorUl.previousElementSibling);
-console.log(getSelectorUl.nextElementSibling);
+let result = Array.from(querySelectorUl).map((link) => link.textContent);
+// let result = Array.from(querySelectorUl).map(function(link){return link.textContent;});
 
-// 4. Посчитать количество элементов li в списке
-
-let listLength = document.getElementsByTagName('li');
-
-console.log(listLength.length);
+console.log(result);
 
 
-// 5. В коде с занятия написать функцию по редактированию задачи.
-let storage = {
-    todos: []
-};
+// 4. В параграфе заменить все дочерние текстовые узлы на “-text-” (вложенные теги должны остаться).
+// Конечный результат:
+//     -text-<a href="#">reprehendunt</a>-text-<mark>nemore</mark>-text-
 
-function generateId() {
-    const words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-    let id = '';
+let getPTag = document.querySelector('p');
 
-    for (let char of words) {
-        let index = Math.floor(Math.random() * words.length);
-        id += words[index];
+let childNodesOfP = getPTag.childNodes;
+
+for (let i = 0; i < childNodesOfP.length; i++) {
+
+    if (childNodesOfP[i].nodeName == '#text') {
+
+        let textNode = document.createTextNode('-text-');
+        getPTag.replaceChild(textNode, childNodesOfP[i]);
+
     }
 
-    return id;
-}
+};
 
-function addNewTodoToStorage(title, text) {
-    if (!title) return console.log('Введите заголовок задачи');
-    if (!text) return console.log('Введите текст задачи');
 
-    const newTask = {
-        title,
-        text,
-        id: generateId()
+
+// Свойства. Задачи.
+
+// 1. Найти в коде список ul и добавить класс “list”
+
+document.querySelector('ul').classList.add("list");
+
+
+// 2. Найти в коде ссылку, находящуюся после списка ul, и добавить id=link
+
+document.querySelector('ul ~ a').setAttribute('id','link');
+
+
+
+// 3. На li через один (начиная с самого первого) установить класс “item”
+
+let nodesOfLi = document.querySelectorAll('ul li');
+
+let getArrayFromNodes = Array.from(nodesOfLi);
+
+let getClassNamedItem = getArrayFromNodes.map(function (link, index) {
+
+    if (index % 2 == 0) {
+        link.classList.add("item")
     };
 
-    storage.todos.push(newTask);
+});
 
-    return storage.todos;
+
+
+// 4. На все ссылки в примере установить класс “custom-link”
+
+let allLinksOfExemple = document.links;
+
+let getArrayFromNodesOfLinks = Array.from(allLinksOfExemple).map((link) => link.classList.add("custom-link"));
+
+
+
+// 1. Не используя innerHTML, добавить в список несколько li с классом ‘new-item’ и текстом ‘item’ + номер li:
+
+// <ul>
+// <li><a href="#">Link1</a></li>
+// ...
+// <li class=”new-item”>item 5</li>
+// <li class=”new-item”>item 6</li>
+// </ul>
+
+// Вручную номер li не ставить оно должно подставляться в зависимости от кол-ва лишек в списке.
+
+let getUlElement = document.querySelector('ul');
+
+let getAllLiFromUl = document.querySelectorAll('ul li');
+
+let fragment = document.createDocumentFragment();
+
+getAllLiFromUl.forEach(function (element, index) {
+
+    let createTagLi = document.createElement('li');
+
+    let addClassNewItem = createTagLi.classList.add('new-item');
+
+    createTagLi.textContent = `item ${index+1}`;
+
+    fragment.appendChild(createTagLi);
+
+});
+
+getUlElement.appendChild(fragment);
+
+
+// 2. В каждую ссылку, которая находятся внутри списка ul добавить по тегу strong (в каждую ссылку один - strong).
+
+let linksInUl = document.querySelectorAll('ul a');
+
+for (i = 0; i < linksInUl.length; i++){
+
+    let link = linksInUl[i];
+    let createElementStrong = document.createElement('strong');
+    link.appendChild(createElementStrong);
+
+};
+
+
+
+// 3. В начало документа (в начало body) добавить картинку img с атрибутами src и alt (текст придумайте сами).
+// В src добавьте реальный url к картинке. Для создания элемента используйте метод createElement.
+
+let createImgElement = document.createElement('img');
+
+let addteSrc = createImgElement.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Пример.png');
+
+let addAlt = createImgElement.setAttribute('alt', 'Example');
+
+let getBodyFirstChild = document.body.firstElementChild;
+
+let addImgBeforeBody = document.body.insertBefore(createImgElement, getBodyFirstChild);
+
+
+
+
+
+// 4. Найти на странице элемент mark, добавить в конец содержимого текст “green” и на элемент установить класс green
+
+let getMarkElement = document.querySelector('mark');
+
+let addText = getMarkElement.innerText += " green";
+
+let addClassGreen = getMarkElement.classList.add('green');
+
+
+
+
+// 5. Отсортировать li внутри списка в обратном порядке (по тексту внутри)
+
+let getAllLi = document.querySelectorAll("ul li");
+
+let reverseArray = Array.from(getAllLi).reverse();
+
+let ulTag = document.querySelector('ul');
+
+for (let i = 0; i < reverseArray.length; i++) {
+    ulTag.appendChild(reverseArray[i]);
 }
 
-addNewTodoToStorage('My title 1', 'My text 1');
-addNewTodoToStorage('My title 2', 'My text 2');
-addNewTodoToStorage('My title 3', 'My text 3');
-addNewTodoToStorage('My title 4', 'My text 4');
-
-function deleteTodoFromStorage(id) {
-    if (!id) return console.log('Передайте id задачи');
-
-    const taskIndex = storage.todos.findIndex((task) => task.id === id);
-
-    if (taskIndex === -1) return console.log('id несуществуе');
-
-    const removedTask = storage.todos.splice(taskIndex, 1);
-
-    return removedTask;
-}
 
 
-function editTaskStorage(id, title, text) {
-    if (!title) return console.log('Введите новый заголовок задачи');
-    if (!text) return console.log('Введите новый текст задачи');
-    if (!id) return console.log('Не выбрано задание для изменения');
 
-    const taskIndex = storage.todos.findIndex((task) => task.id === id);
-
-    if (taskIndex === -1) return console.log('id несуществуе');
-
-    const changedTask = {
-        title,
-        text,
-        id
-    };
-
-    storage.todos[taskIndex] = changedTask;
-
-    return storage.todos;
-}
-
-// editTaskStorage('some id', 'new title', 'new text');
-console.log(storage.todos);
