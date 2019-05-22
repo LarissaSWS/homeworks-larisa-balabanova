@@ -3,31 +3,31 @@
 // Зная структуру html, с помощью изученных методов получить (в консоль):
 // 1. head
 
-console.log(document.head);
+//console.log(document.head);
 
 // 2. body
 
-console.log(document.body);
+//console.log(document.body);
 
 // 3. все дочерние элементы body и вывести их в консоль.
 
-console.log(document.body.children);
+//console.log(document.body.children);
 
 // 4. первый div и все его дочерние узлы
 
 // а) вывести все дочерние узлы в консоль
 
-console.log(document.body.firstElementChild.children);
+//console.log(document.body.firstElementChild.children);
 
 // б) вывести в консоль все дочерние узлы, кроме первого и последнего
 
-let childrenArray = document.body.firstElementChild.children;
-
-for (var i = 1; i < childrenArray.length - 1; ++i) {
-    console.log(childrenArray[i])
-}
-
-console.log(childrenArray.slice(1, childrenArray.length - 1));
+// let childrenArray = document.body.firstElementChild.children;
+//
+// for (var i = 1; i < childrenArray.length - 1; ++i) {
+//     console.log(childrenArray[i])
+// }
+//
+// console.log(childrenArray.slice(1, childrenArray.length - 1));
 
 // Для навигации по DOM использовать методы, которые возвращают только элементы
 
@@ -45,12 +45,11 @@ console.log(childrenArray.slice(1, childrenArray.length - 1));
 // // false так ul НЕ является родительским элементом для mark
 
 function isParent(parent, child){
-             console.log(parent.contains(child));
-        };
+    return parent.contains(child);
+};
 
-isParent(document.body.children[0], document.querySelector('mark'));
-isParent(document.querySelector('ul'), document.querySelector('mark'));
-
+console.log(isParent(document.body.children[0], document.querySelector('mark')));
+console.log(isParent(document.querySelector('ul'), document.querySelector('mark')));
 
 
 // 2. Получить список всех ссылок, которые не находятся внутри списка ul
