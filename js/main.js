@@ -12,9 +12,7 @@ function getInfoNode(node){
 
     let typeOfNode = node.nodeType;
     let nameOfNode = node.nodeName;
-    let numberOfChildren = node.children;
-
-    if (!numberOfChildren) return numberOfChildren = 0;
+    let numberOfChildren = node.children.length;
 
     const infoNode = {
         typeOfNode,
@@ -43,16 +41,16 @@ console.log(result);
 // Конечный результат:
 //     -text-<a href="#">reprehendunt</a>-text-<mark>nemore</mark>-text-
 
-let getPTag = document.querySelector('p');
+let pTag = document.querySelector('p');
 
-let childNodesOfP = getPTag.childNodes;
+let childNodesOfP = pTag.childNodes;
 
 for (let i = 0; i < childNodesOfP.length; i++) {
 
     if (childNodesOfP[i].nodeName == '#text') {
 
         let textNode = document.createTextNode('-text-');
-        getPTag.replaceChild(textNode, childNodesOfP[i]);
+        pTag.replaceChild(textNode, childNodesOfP[i]);
 
     }
 
@@ -77,9 +75,9 @@ document.querySelector('ul ~ a').setAttribute('id','link');
 
 let nodesOfLi = document.querySelectorAll('ul li');
 
-let getArrayFromNodes = Array.from(nodesOfLi);
+let arrayWithNodes = Array.from(nodesOfLi);
 
-let getClassNamedItem = getArrayFromNodes.map(function (link, index) {
+let getClassNamedItem = arrayWithNodes.map(function (link, index) {
 
     if (index % 2 == 0) {
         link.classList.add("item")
@@ -93,7 +91,7 @@ let getClassNamedItem = getArrayFromNodes.map(function (link, index) {
 
 let allLinksOfExemple = document.links;
 
-let getArrayFromNodesOfLinks = Array.from(allLinksOfExemple).map((link) => link.classList.add("custom-link"));
+Array.from(allLinksOfExemple).map((link) => link.classList.add("custom-link"));
 
 
 
@@ -108,17 +106,17 @@ let getArrayFromNodesOfLinks = Array.from(allLinksOfExemple).map((link) => link.
 
 // Вручную номер li не ставить оно должно подставляться в зависимости от кол-ва лишек в списке.
 
-let getUlElement = document.querySelector('ul');
+let ulElement = document.querySelector('ul');
 
-let getAllLiFromUl = document.querySelectorAll('ul li');
+let allLiFromUl = document.querySelectorAll('ul li');
 
 let fragment = document.createDocumentFragment();
 
-getAllLiFromUl.forEach(function (element, index) {
+allLiFromUl.forEach(function (element, index) {
 
     let createTagLi = document.createElement('li');
 
-    let addClassNewItem = createTagLi.classList.add('new-item');
+    createTagLi.classList.add('new-item');
 
     createTagLi.textContent = `item ${index+1}`;
 
@@ -126,21 +124,32 @@ getAllLiFromUl.forEach(function (element, index) {
 
 });
 
-getUlElement.appendChild(fragment);
+ulElement.appendChild(fragment);
 
 
 // 2. В каждую ссылку, которая находятся внутри списка ul добавить по тегу strong (в каждую ссылку один - strong).
 
+// let linksInUl = document.querySelectorAll('ul a');
+//
+// for (i = 0; i < linksInUl.length; i++){
+//
+//     let link = linksInUl[i];
+//     let createElementStrong = document.createElement('strong');
+//     let textFromA = link.innerText;
+//
+//     link.insertAdjacentHTML('afterbegin', firstPart);
+//     link.insertAdjacentHTML('beforeend', nextPart);
+
+
 let linksInUl = document.querySelectorAll('ul a');
 
-for (i = 0; i < linksInUl.length; i++){
-
-    let link = linksInUl[i];
-    let createElementStrong = document.createElement('strong');
-    link.appendChild(createElementStrong);
-
-};
-
+    for (let i = 0; i < linksInUl.length; i++) {
+        let createElementStrong = document.createElement('strong');
+        let link = linksInUl[i];
+        createElementStrong.innerText = link.innerText;
+        link.innerHTML = '';
+        link.insertAdjacentElement('afterbegin', createElementStrong);
+    };
 
 
 // 3. В начало документа (в начало body) добавить картинку img с атрибутами src и alt (текст придумайте сами).
@@ -148,15 +157,13 @@ for (i = 0; i < linksInUl.length; i++){
 
 let createImgElement = document.createElement('img');
 
-let addteSrc = createImgElement.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Пример.png');
+createImgElement.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Пример.png');
 
-let addAlt = createImgElement.setAttribute('alt', 'Example');
+createImgElement.setAttribute('alt', 'Example');
 
 let getBodyFirstChild = document.body.firstElementChild;
 
-let addImgBeforeBody = document.body.insertBefore(createImgElement, getBodyFirstChild);
-
-
+document.body.insertBefore(createImgElement, getBodyFirstChild);
 
 
 
@@ -164,18 +171,17 @@ let addImgBeforeBody = document.body.insertBefore(createImgElement, getBodyFirst
 
 let getMarkElement = document.querySelector('mark');
 
-let addText = getMarkElement.innerText += " green";
+getMarkElement.innerText += " green";
 
-let addClassGreen = getMarkElement.classList.add('green');
-
+getMarkElement.classList.add('green');
 
 
 
 // 5. Отсортировать li внутри списка в обратном порядке (по тексту внутри)
 
-let getAllLi = document.querySelectorAll("ul li");
+let allLi = document.querySelectorAll("ul li");
 
-let reverseArray = Array.from(getAllLi).reverse();
+let reverseArray = Array.from(allLi).reverse();
 
 let ulTag = document.querySelector('ul');
 
