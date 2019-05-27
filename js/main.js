@@ -75,16 +75,13 @@ document.querySelector('ul ~ a').setAttribute('id','link');
 
 let nodesOfLi = document.querySelectorAll('ul li');
 
-let arrayWithNodes = Array.from(nodesOfLi);
-
-let getClassNamedItem = arrayWithNodes.map(function (link, index) {
+Array.from(nodesOfLi).map(function (link, index) {
 
     if (index % 2 == 0) {
         link.classList.add("item")
     };
 
 });
-
 
 
 // 4. На все ссылки в примере установить класс “custom-link”
@@ -169,11 +166,11 @@ document.body.insertBefore(createImgElement, getBodyFirstChild);
 
 // 4. Найти на странице элемент mark, добавить в конец содержимого текст “green” и на элемент установить класс green
 
-let getMarkElement = document.querySelector('mark');
+let markElement = document.querySelector('mark');
 
-getMarkElement.innerText += " green";
+markElement.innerText += " green";
 
-getMarkElement.classList.add('green');
+markElement.classList.add('green');
 
 
 
