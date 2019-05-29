@@ -1,39 +1,62 @@
-let string = 'some test string';
-
-alert(string[0]); //получаем первую букву
-alert(string.length); //определяем длину
-alert(string.length-1); //последний символ строки
-alert(string[15]); //получаем последнюю буквы
-alert(string[0].toUpperCase()); //делаем первую букву большой
-alert(string[15].toUpperCase()); //делаем последнюю букву большой
-alert(string.indexOf("string")); //находим положение слова в строке
-alert(string.indexOf("string")-1); //положение второго пробела
-alert(string.substr(5,4));// получаем строку с 5 символа 4 буквы
-alert(string.slice(5,9));// получаем строку с 5 по 9 символы
-alert(string.slice(0, -6) );// новая строка с удалением 6 символов из предыдущей строки
-var a = '20';
-	b = '16';
-	string = a + b; 
-	alert(string); // получение из двух переменных одной с значением "2016"
+// 1.По нажатию на кнопку "btn-msg" должен появиться алерт с тем текстом который находится в атрибуте data-text у кнопки.
 
 
+let btn = document.getElementById('btn-msg');
+btn.addEventListener('click', () => alert(btn.dataset.text));
 
-var PI = 3.14159265359;
-	alert(Math.round(PI * 100) / 100); //округление до 2 знаков после запятой
 
-alert(Math.max(15, 11, 16, 12, 51, 12, 13, 51)); // получение наибольшего числа
+// 2. При наведении указателя мыши на "btn-msg", кнопка становится красной; когда указатель мыши покидает кнопку,
+//    она становится прежнего цвета. Цвет менять можно через добавление класса.
 
-alert(Math.min(15, 11, 16, 12, 51, 12, 13, 51)); // получение наименьшего числа
+btn.addEventListener('mouseover', () => btn.classList.add('red'));
+btn.addEventListener('mouseout', () => btn.removeAttribute('class'));
 
-var numberRandom = Math.random();
-alert(numberRandom);				// Получаем случайное число
-alert(Math.round(numberRandom * 100) / 100); // округление до 2 знаков после запятой
 
-var numberRandomToTen = Math.floor(Math.random() * 11); 
-alert(numberRandomToTen); // случайное целое число от 0 до 10
+// 3. При нажатии на любой узел документа показать в элементе с id=tag имя тега нажатого элемента.
 
-var numbersPlus = 0.6 + 0.7;
-alert(Math.round(numbersPlus * 10) / 10); // приведение результата к 1.3
+let areaForClick = document.body;
+let idTag = document.getElementById('tag');
+let text = idTag.innerText + " ";
 
-var numberString = '100$';
-alert(parseInt(numberString)); //получение число из строки "100$"
+
+
+areaForClick.addEventListener('click', ({target}) => {
+
+    idTag.innerText = text.slice(0, text.length);
+    idTag.insertAdjacentText('beforeend', target.tagName);
+
+});
+
+
+// 4. При нажатии на кнопку btn-generate добавлять в список ul элемент списка Li с текстом Item +
+// порядковый номер Li по списку, т.е Item 3, Item 4 и т.д
+
+
+let btnGenerate = document.getElementById('btn-generate');
+let ulElement = document.querySelector('ul');
+
+
+function addTheLi() {
+
+    let liElement = document.querySelectorAll('ul li');
+    let createLi = document.createElement('li');
+
+    liElement.forEach( function (item, number){
+
+        createLi.textContent = `Item ${number+2}`;
+
+        ulElement.appendChild(createLi);
+
+    });
+
+}
+
+btnGenerate.addEventListener('click', addTheLi);
+
+
+
+
+
+
+
+
