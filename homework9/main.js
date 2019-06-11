@@ -9,7 +9,7 @@
 
 function getObject(a, ...rest){
 
-    console.log(a, rest);
+    console.log({a, rest});
 
 };
 
@@ -33,11 +33,7 @@ const organisation = {
           }
 };
 
-function getInfo({ name, info: { partners: [ nameOfBrand1, nameOfBrand2 ] } }) {
-
-    if ( name === ""){
-        name = "Unknown"
-    };
+function getInfo({ name = "Unknown" , info: { partners: [ nameOfBrand1, nameOfBrand2 ] } }) {
 
     return { name, info: {partners: [ nameOfBrand1, nameOfBrand2]} };
 
