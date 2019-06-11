@@ -1,12 +1,10 @@
 let dropdownItem = document.getElementsByClassName('dropdown-item');
 
 for (let i = 0; i < dropdownItem.length; i++){
-    //console.log(dropdownItem[i].firstElementChild);
 
     dropdownItem[i].firstElementChild.addEventListener('click', function({target}) {
 
         let targetNextSibling = target.nextElementSibling;
-        //console.log(event.target);
 
         if (targetNextSibling.classList.contains('d-none')) {
             targetNextSibling.classList.toggle('d-none');
