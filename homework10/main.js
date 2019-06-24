@@ -149,6 +149,10 @@ const calculator = (function () {
 
         return a;
     }
+    
+    function result() {
+       return alert(a);
+    }
 
     return {
         calcSet,
@@ -156,7 +160,8 @@ const calculator = (function () {
         calcMultiplication,
         calcSubtraction,
         calcDivision,
-        calcExponentiation
+        calcExponentiation,
+        result
     }
 
 })();
@@ -167,6 +172,7 @@ console.log(calculator.calcMultiplication(2));
 console.log(calculator.calcSubtraction(4));
 console.log(calculator.calcDivision(2));
 console.log(calculator.calcExponentiation(4));
+calculator.result();
 
 
 
